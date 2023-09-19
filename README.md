@@ -5,7 +5,7 @@
 <br>스윗미는 게시판, 그룹, 캘린더, 스톱워치, 채팅서비스를 제공하는 스터디 웹사이트입니다.
 
 • 개발 기간 : 2023.08.26. ~ 2023.09.18.
-<br> • 팀 노션 : [URL](https://young-baron-d39.notion.site/SWITHME-aaef2a22328b4199b9639148c7d192fb?pvs=4)
+<br> • 팀 노션 : [URL](https://rowan-pufferfish-a5a.notion.site/SWITHME-aeed82dd52144ca7b058d18e6405d2bd)
 <br>
 <img src="https://drive.google.com/uc?id=1ycENGrTHndcqJIcovlP4X-CnNy1VERtU" />
  <br><br>
@@ -36,7 +36,7 @@
 
 <h2>🌐 ERD & API</h2>
 <a href="https://www.erdcloud.com/d/nsyTLkMBDYAbSdHum" > ERD </a> &
-<a href="https://www.notion.so/7c369a586ec944ba80a535197a03bc6a?v=6fc3cb1ffa3c433aa086ecff7bfdc40d" > API</a>
+<a href="https://www.notion.so/API-01750d96374a4aa9afc58ab496c0a65e?pvs=4" > API</a>
 
 <br>
 <h2>⛏️기술 스택</h2>
@@ -76,6 +76,6 @@
 
 <br>
 <h2>🤝 협업 규칙</h2>
-<a href="https://www.notion.so/441694005d964cb5b34822d4d5fa2e6a">협업 규칙</a>
+<a href="https://www.notion.so/0599f43749c2427c853fa95cdaa8b238?pvs=4">협업 규칙</a>
 
 
