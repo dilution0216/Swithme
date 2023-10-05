@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/head :: common_header(~{::title},~{::link})">
+    <title>전체 게시물</title>
+    <link rel="stylesheet" th:href="@{/css/post/posts.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+</head>
+<body>
+
+<div class="app-container">
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+    <div class="app-content">
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+        <div class="projects-section">
+            <div class="projects-section-header">
+                <p>게시물</p>
+                <button class="add-btn" title="Add New Project" onclick="location.href='/view/post/write'">
+                    <svg class="btn-icon feather feather-plus" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <!--                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">-->
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </button>
+<!--               projects-->
+            </div>
+            <div class="projects-section-line">
+                <div class="projects-status">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/view/posts'">전체</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setCategory(1)">프로그래밍</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setCategory(2)">수능</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setCategory(3)">공무원 시험</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setCategory(4)">어학 자격증</button>
+                </div>
+                <div class="view-actions">
+                    <button class="view-btn list-view" title="List View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                            <line x1="8" y1="6" x2="21" y2="6" />
+                            <line x1="8" y1="12" x2="21" y2="12" />
+                            <line x1="8" y1="18" x2="21" y2="18" />
+                            <line x1="3" y1="6" x2="3.01" y2="6" />
+                            <line x1="3" y1="12" x2="3.01" y2="12" />
+                            <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+                    </button>
+                    <button class="view-btn grid-view active" title="Grid View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" /></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="project-boxes jsGridView">
+            <div class="post-cards" id="post-cards">
+<!--                <div class="project-box-wrapper" >-->
+<!--                    <div class="project-box" style="background-color: #fee4cb;">-->
+<!--                        <div class="project-box-header">-->
+<!--                            <span>December 10, 2020</span>-->
+<!--                            <div class="more-wrapper">-->
+<!--                                <button class="project-btn-more">-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="project-box-content-header">-->
+<!--                            <p class="box-content-header">Web Designing</p>-->
+<!--                            <p class="box-content-subheader">Prototyping</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            </div>
+        </div>
+        <!-- 채팅 -->
+        <div class="messages-section">
+            <button class="messages-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-x-circle">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+            </button>
+            <div class="projects-section-header">
+                <p>전체 채팅</p>
+            </div>
+
+            <!-- 채팅 내용 시작 -->
+            <div class="messages" id="chat-container" style="height: 82%; overflow-y: scroll;">
+
+            </div>
+            <!-- 채팅 내용 끝 -->
+
+
+            <!-- 전송 버튼 -->
+            <form id="messageForm" name="messageForm">
+                <div class="form-group">
+                    <div class="input-group clearfix">
+                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control" required>
+                        <button type="submit" class="btn btn-light">Send</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="/js/post/posts.js"></script>
+
+<!-- 채팅 관려 자바스크립트-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/post/allChat.js"></script>
+</body>
+</html>

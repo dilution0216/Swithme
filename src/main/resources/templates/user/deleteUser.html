@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{layout/head :: common_header(~{::title},~{::link})}">
+  <title>회원 탈퇴</title>
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <link rel="stylesheet" th:href="@{/css/nav.css}">
+</head>
+<body>
+<div id="logo"><a href="/">SWITHME</a></div>
+<div id="nav-icon">
+  <a th:href="@{/users/myPage}" sec:authorize="isAuthenticated()" class="right_button"><i
+          class="fa-solid fa-user"></i></a>
+
+  <a th:href="@{/users/logout}" sec:authorize="isAuthenticated()" class="right_button"><i
+          class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+  <a th:href="@{/users/login}" sec:authorize="!isAuthenticated()" class="right_button"><i
+          class="fa-solid fa-arrow-right-to-bracket"></i></a>
+</div>
+
+<div class="container" id="container">
+  <!-- 회원가입 -->
+  <div class="form-container sign-up-container">
+
+    <form action="/api/users/signup" method="post" >
+      <!--      <h2>회원가입</h2>-->
+
+      <!--      <input type="email" id="username" name="username" th:field="*{username}" placeholder="아이디(이메일)">-->
+      <!--      <span th:errors="*{username}"></span>-->
+
+      <!--      <input type="password" id="password" name="password" th:field="*{password}" placeholder="비밀번호">-->
+      <!--      <span th:errors="*{password}"></span>-->
+
+      <!--      <input type="password" id="checkPassword" name="checkPassword" th:field="*{checkPassword}"-->
+      <!--             placeholder="비밀번호 확인">-->
+      <!--      <span th:errors="*{checkPassword}"></span>-->
+
+      <!--      <input type="text" id="nickName" name="nickName" th:field="*{nickName}" placeholder="닉네임">-->
+      <!--      <span th:errors="*{nickName}"></span>-->
+
+      <!--      <button type="submit" onclick="confirmSubmit()">회원가입</button>-->
+    </form>
+  </div>
+
+  <!-- 로그인 -->
+  <div class="form-container sign-in-container">
+
+    <form action="/api/users/delete" method="post">
+      <h3>회원탈퇴</h3>
+      <p> 비밀번호 입력시 탈퇴되며 취소할 수 없습니다.</p>
+
+      <label for="username">아이디</label>
+      <input type="text" id="username"  name="username" th:value= "${username}" readonly>
+
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" name="password" required>
+      <p th:if="${error}" th:text="${error}"></p>
+      <button class="submit" type="submit" >확인</button>
+    </form>
+  </div>
+
+  <!-- 오버레이 화면 -->
+  <div class="overlay-container">
+
+    <div class="overlay">
+
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <!--        <button class="ghost" id="signIn">로그인</button>-->
+      </div>
+
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <!--        <button class="ghost" id="signUp">회원가입</button>-->
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

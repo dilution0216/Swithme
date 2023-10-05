@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/head :: common_header(~{::title},~{::link})">
+    <title>게시물 작성</title>
+    <link rel="stylesheet" th:href="@{/css/post/postWrite.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+</head>
+
+<body>
+
+<div class="app-container">
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+    <div class="app-content">
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+        <div class="projects-section">
+            <div class="project-box" style="background-color: #e9e7fd;">
+<!--                                                글쓰기 폼-->
+                <div class="write" id="write">
+                    <form id="postForm" enctype="multipart/form-data">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-title">제목</span>
+                            <input type="text" id="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing">
+                        </div>
+                        <div class="input-group mb-3 g-2">
+                            <span class="input-group-text" id="inputGroup-username">작성자</span>
+                            <input type="text" id="username" class="form-control me-4" aria-label="Sizing example username" th:value="${info_username}" aria-describedby="username-sizing" readonly>
+                            <span class="input-group-text" for="category">카테고리</span>
+                            <select class="form-select" id="category">
+                                <option selected>카테고리를 선택하세요</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="input-group-lg">
+                            <span class="input-group-text">게시글 내용</span>
+                            <textarea class="form-control" id="content" aria-label="With textarea" rows="15"></textarea>
+                        </div>
+<!--                                이미지 업로드-->
+                        <br>
+                        <div ><strong>이미지를 선택해주세요!</strong>
+                        <input type="file" id="image" accept="image/*">
+                        <br><br>
+                        </div>
+<!--                                이미지 업로드 끝-->
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-dark btn-lg me-5 w-25" onclick="location.href='/view/posts'" id="cancel">취소</button>
+                            <button type="button" class="btn btn-dark btn-lg me-5 w-25" id="savePost">저장</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+<!--       >                                         글쓰기 폼 끝-->
+    </div>
+</div>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1201.0.min.js"></script>
+<script src="/js/post/postWrite.js"></script>
+</body>
+</html>

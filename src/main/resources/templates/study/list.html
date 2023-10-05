@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Calendar</title>
+</head>
+<body>
+<h1>Study Calendar</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="study : ${studies}">
+    <td th:text="${study.name}">Study Name</td>
+    <td th:text="${study.startTime}">Start Time</td>
+    <td th:text="${study.endTime}">End Time</td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/studies/new}">Create New Study</a>
+</body>
+</html>

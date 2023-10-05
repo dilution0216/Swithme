@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="layout/head :: common_header(~{::title},~{::link})">
+    <title>캘린더</title>
+    <!--  코드펜 css  -->
+    <link rel="stylesheet" th:href="@{/css/sample.css}"/>
+    <!-- 네비게이션 css -->
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+
+    <link href="/webjars/fullcalendar/5.9.0/main.min.css" rel="stylesheet">
+</head>
+<style>
+    .modal-body {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+
+    .projects-section-header {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 30px;
+    }
+
+    .button-right {
+        align-items: center;
+        justify-content: right;
+        display: flex;
+        font-size: 30px;
+    }
+
+    #calendar {
+        height: 90%;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 로드 -->
+<script src="/webjars/fullcalendar/5.9.0/main.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $.ajax({
+            method: 'GET',
+            url: '/studies/calendar1',
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events : data
+                })
+                calendar.render();
+
+                // 이벤트 클릭 시 실행할 함수를 정의합니다.
+                calendar.setOption('eventClick', function(info) {
+                    var eventId = info.event.id;
+                    openStudyDetails(eventId);
+                });
+
+            },
+            error: function (xhr, status, error) {
+                // 에러 시 처리할 코드
+                console.error(error);
+            }
+        });
+    });
+
+    function openStudyDetails(id) {
+        $.get('/studies/details/' + id, function (data) {
+            $('#study-details-body').html(data);
+            $('#edit-button').attr('onclick', 'openEditForm(' + id + ')');
+            $('#delete-button').attr('onclick', 'deleteStudy(' + id + ')');
+            $('#study-details-modal').modal('show');
+        });
+    }
+
+    function openEditForm(id) {
+        window.location.href = '/studies/edit/' + id;
+    }
+
+    function deleteStudy(id) {
+        if (confirm('일정을 삭제하시겠습니까?')) {
+            window.location.href = '/studies/delete/' + id;
+        }
+    }
+
+</script>
+
+<body>
+<div class="app-container">
+    <!-- 상단 네비게이션 전체 -->
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+
+    <!-- 메인 영역 전체(왼쪽 버튼, 프로젝트, 메시지 부분) -->
+    <div class="app-content">
+
+        <!-- 왼쪽 메인 세로 네비게이션바 -->
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+
+        <!-- 메인 가운데 영역 -->
+        <div class="projects-section">
+
+            <!-- 메인 가운데 - 제목, 날짜 영역 -->
+            <!--            <div class="projects-section-header">-->
+            <!--                <p>Projects</p>-->
+            <!--                <p class="time">December, 12</p>-->
+            <!--            </div>-->
+
+
+            <!-- 메인 가운데 - 내용 영역 시작 -->
+
+
+
+            <div id="calendar-center">
+                <div id="calendar"></div>
+                <!-- 메인 가운데 - 내용 영역 끝  -->
+
+            </div>
+        </div>
+
+        <!-- 메인 오른쪽 영역(채팅 메시지) -->
+        <div class="messages-section">
+
+
+            <!-- 화면 줄이면 나타나는 메시지 온오프 버튼(반응형) -->
+            <button class="messages-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" /></svg>
+            </button>
+            <!-- 메시지 맨 위 타이틀(client Messages 부분) -->
+            <div class="projects-section-header">
+                <p>일정</p>
+            </div>
+
+            <!-- 메시지 시작 -->
+            <div class="messages">
+
+                <div class="button-right">
+                    <button type="button" class="btn btn-secondary" onclick="location.href='/studies/new'">일정 작성</button>
+                    <button class="btn btn-primary" id="edit-button">수정</button>
+                    <button class="btn btn-danger" id="delete-button">삭제</button>
+                </div>
+                <div class="message-box">
+                        <p class="message-line">
+                        <div class="modal-body" id="study-details-body">
+                            <!-- 상세 정보가 표시될 공간 -->
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- 메시지 끝 -->
+
+
+    </div>
+</div>
+</div>
+<script src="/js/sample.js"></script>
+<script>
+    // 왼쪽 세로 네비게이션 버튼표시
+    window.addEventListener("load", function() {
+
+// 네비게이션 항목을 선택
+        const navItems = document.querySelectorAll(".app-sidebar-link");
+        for (let i = 0; i < navItems.length; i++) {
+            let element = navItems.item(i);
+            element.classList.remove('active')
+        }
+
+        const nav = document.querySelector(".nav-calender");
+        nav.classList.add('active')
+    });
+</script>
+
+</body>
+</html>

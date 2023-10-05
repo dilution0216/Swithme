@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="layout/head :: common_header(~{::title},~{::link})">
+    <title>채팅</title>
+    <link rel="stylesheet" th:href="@{/css/chatgroup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+</head>
+<body>
+<div class="app-container">
+    <!-- 상단 네비게이션 전체 -->
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+
+    <!-- 메인 영역 전체(왼쪽 버튼, 프로젝트, 메시지 부분) -->
+    <div class="app-content">
+
+        <!-- 왼쪽 메인 세로 네비게이션바 -->
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+
+        <!-- 메인 가운데 영역 -->
+        <div class="projects-section">
+
+            <!-- 메인 가운데 - 제목, 날짜 영역 -->
+            <div class="projects-section-header">
+                <p>그룹 채팅<span style="font-size: 14px;">비슷한 주제를 가진 사람들과 대화해 보세요!</span></p>
+
+                <button class="btn btn-dark" onclick="create_chat()">
+                    채팅방 생성
+                </button>
+            </div>
+
+
+            <div class="projects-section-line">
+                <!-- 메인 가운데 - 진행 영역(삭제 가능) -->
+                <div class="projects-status">
+                    <div th:replace="~{fragment/nav :: useNavChat}">insert</div>
+                </div>
+
+                <!-- 메인 가운데 - 3개 분할 버튼, 길게 보기 버튼 -->
+                <div class="view-actions">
+                    <button class="view-btn list-view" title="List View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                            <line x1="8" y1="6" x2="21" y2="6" />
+                            <line x1="8" y1="12" x2="21" y2="12" />
+                            <line x1="8" y1="18" x2="21" y2="18" />
+                            <line x1="3" y1="6" x2="3.01" y2="6" />
+                            <line x1="3" y1="12" x2="3.01" y2="12" />
+                            <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+                    </button>
+                    <button class="view-btn grid-view active" title="Grid View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" /></svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- 메인 가운데 - 내용 영역 시작 -->
+            <div class="project-boxes jsGridView"> <!-- 메인 전체 박스 -->
+                <div class="project-box-wrapper" th:each="chatRoom : ${chatRooms}"> <!-- 메인 작은 네모 박스 -->
+                    <div class="project-box" style="background-color: #fee4cb;">
+
+                        <!-- 네모영역 상단 -->
+                        <div class="project-box-header">
+
+                            <!-- 날짜 부분 -->
+                            <span></span>
+
+                            <!-- 점3개 부분 -->
+                            <a th:href="@{/chat/room/edit(id=${chatRoom.id})}" class="popup-link">
+                            <div class="more-wrapper">
+                                <button class="project-btn-more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
+                            </div>
+                            </a>
+                        </div>
+                        <!-- 제목, 소제목(본문)  -->
+                        <div class="project-box-content-header">
+                            <p class="box-content-header" th:text="${chatRoom.title}">타이틀</p>
+                            <p class="box-content-subheader" th:text="${chatRoom.content}">소제목</p>
+                        </div>
+
+                        <!-- 진행바 - 퍼센트  -->
+                        <div class="box-progress-wrapper">
+                        </div>
+
+                        <!-- 하얀선 아래  -->
+                        <div class="project-box-footer">
+
+                            <!-- 참가자 그림  -->
+                            <div class="participants">
+
+                            </div>
+
+                            <!-- 2 Days Left 버튼 모양  -->
+                            <div class="days-left" style="color: #ff942e;">
+                                <a th:href="@{/chat(url=${chatRoom.chatUrl})}" onclick="changeChat()" >채팅 입장</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 메인 가운데 - 내용 영역 끝  -->
+
+            </div>
+        </div>
+
+        <!-- 메인 오른쪽 영역(채팅 메시지) -->
+        <div class="messages-section">
+            <!-- 화면 줄이면 나타나는 메시지 온오프 버튼(반응형) -->
+            <button class="messages-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" /></svg>
+            </button>
+            <!-- 메시지 맨 위 타이틀(client Messages 부분) -->
+            <div class="projects-section-header">
+                <p>채팅</p>
+            </div>
+
+            <!-- 메시지 시작 -->
+            <div class="messages" id="chat-container" style="height: 82%; overflow-y: scroll;">
+
+            </div>
+            <!-- 채팅 내용 끝 -->
+
+            <!-- 전송 버튼 -->
+            <form id="messageForm" name="messageForm">
+                <div class="form-group">
+                    <div class="input-group clearfix">
+                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
+                        <button type="submit" class="btn btn-light">Send</button>
+                    </div>
+                </div>
+            </form>
+            <!-- 메시지 끝 -->
+
+        </div>
+    </div>
+</div>
+<script src="/js/sample.js"></script>
+
+<!-- 채팅 관련 자바 스크립트-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/chatgroup.js"></script>
+</body>
+</html>

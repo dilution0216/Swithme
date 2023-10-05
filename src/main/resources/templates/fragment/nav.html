@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<!-- 메인 페이지 화면 상단 가로 네비게이션 적용-->
+<div class="app-header" th:fragment="useNav">
+    <!-- 상단 네비게이션 왼쪽 -->
+    <div class="app-header-left">
+        <span class="app-icon"></span>
+        <p class="app-name"><a href="/">SWITHME</a></p>
+<!--        <div class="search-wrapper">-->
+<!--            <input class="search-input" type="text" placeholder="Search">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"-->
+<!--                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search"-->
+<!--                 viewBox="0 0 24 24">-->
+<!--                <defs></defs>-->
+<!--                <circle cx="11" cy="11" r="8"></circle>-->
+<!--                <path d="M21 21l-4.35-4.35"></path>-->
+<!--            </svg>-->
+<!--        </div>-->
+    </div>
+
+    <!-- 상단 네비게이션 오른쪽 -->
+    <div class="app-header-right">
+        <button class="mode-switch" title="Switch Theme">
+            <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                 stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+                <defs></defs>
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+        </button>
+        <a th:href="@{/users/myPage}" sec:authorize="isAuthenticated()" class="right_button"><i
+                class="fa-solid fa-user"></i></a>
+
+        <a th:href="@{/users/logout}" sec:authorize="isAuthenticated()" class="right_button"><i
+                class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+        <a th:href="@{/users/login}" sec:authorize="!isAuthenticated()" class="right_button"><i
+                class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <!--        <li><a href="#" th:if="${nickName}"><p> <span th:text="${nickName}"></span>님의 접속을 환영합니다.</p></a></li>-->
+    </div>
+    <button class="messages-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-message-circle">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+    </button>
+</div>
+<!-- 반응형 버튼 메시지(창 크기 축소시 나타남 - 채팅창 열고 닫기)-->
+<button class="messages-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+</button>
+</div>
+
+<!-- 세로 네비게이션 적용-->
+<div class="app-sidebar" th:fragment="useNav-vertical">
+
+    <!-- 게시판 -->
+    <a href="/view/posts" class="app-sidebar-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-home">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+    </a>
+
+    <!-- 그룹스터디 -->
+    <a href="/api/view/groups" class="app-sidebar-link nav-groupstudy">
+        <i class="fa-solid fa-users"></i>
+    </a>
+
+    <!-- 캘린더 -->
+    <a href="/studies/calendar" class="app-sidebar-link nav-calender">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-calendar">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+    </a>
+
+    <!-- 스톱워치 -->
+    <a href="/stopwatch" class="app-sidebar-link nav-stopwatch">
+        <i class="fa-regular fa-clock"></i>
+    </a>
+
+    <!-- 채팅 -->
+    <a href="/chat" class="app-sidebar-link nav-chat">
+        <i class="fa-regular fa-comment"></i>
+    </a>
+
+</div>
+
+
+<!-- 채팅 페이지 네비게이션 바 -->
+<div th:fragment="useNavChat" class="navbar navbar-expand-lg bg-body-tertiary">
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/chat}">나의 그룹</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/chat/alert}">초대 알림</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

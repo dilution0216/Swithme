@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="layout/head :: common_header(~{::title},~{::link})">
+    <title>샘플 페이지</title>
+    <!--  코드펜 css  -->
+    <link rel="stylesheet" th:href="@{/css/sample.css}"/>
+    <!-- 네비게이션 css -->
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+</head>
+<body>
+<div class="app-container">
+    <!-- 상단 네비게이션 전체 -->
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+
+    <!-- 메인 영역 전체(왼쪽 버튼, 프로젝트, 메시지 부분) -->
+    <div class="app-content">
+
+        <!-- 왼쪽 메인 세로 네비게이션바 -->
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+
+        <!-- 메인 가운데 영역 -->
+        <div class="projects-section">
+
+            <!-- 메인 가운데 - 제목, 날짜 영역 -->
+            <div class="projects-section-header">
+                <p>Projects</p>
+                <p class="time">December, 12</p>
+            </div>
+
+            <div class="projects-section-line">
+                <!-- 메인 가운데 - 진행 영역(삭제 가능) -->
+                <div class="projects-status">
+                    <div class="item-status">
+                        <span class="status-number">45</span>
+                        <span class="status-type">In Progress</span>
+                    </div>
+                    <div class="item-status">
+                        <span class="status-number">24</span>
+                        <span class="status-type">Upcoming</span>
+                    </div>
+                    <div class="item-status">
+                        <span class="status-number">62</span>
+                        <span class="status-type">Total Projects</span>
+                    </div>
+                </div>
+
+                <!-- 메인 가운데 - 3개 분할 버튼, 길게 보기 버튼 -->
+                <div class="view-actions">
+                    <button class="view-btn list-view" title="List View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                            <line x1="8" y1="6" x2="21" y2="6" />
+                            <line x1="8" y1="12" x2="21" y2="12" />
+                            <line x1="8" y1="18" x2="21" y2="18" />
+                            <line x1="3" y1="6" x2="3.01" y2="6" />
+                            <line x1="3" y1="12" x2="3.01" y2="12" />
+                            <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+                    </button>
+                    <button class="view-btn grid-view active" title="Grid View">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" /></svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- 메인 가운데 - 내용 영역 시작 -->
+            <div class="project-boxes jsGridView"> <!-- 메인 전체 박스 -->
+                <div class="project-box-wrapper"> <!-- 메인 작은 네모 박스 -->
+                    <div class="project-box" style="background-color: #fee4cb;">
+
+                        <!-- 네모영역 상단 -->
+                        <div class="project-box-header">
+
+                            <!-- 날짜 부분 -->
+                            <span>December 10, 2020</span>
+
+                            <!-- 점3개 부분 -->
+                            <div class="more-wrapper">
+                                <button class="project-btn-more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- 제목, 소제목(본문)  -->
+                        <div class="project-box-content-header">
+                            <p class="box-content-header">Web Designing</p>
+                            <p class="box-content-subheader">Prototyping</p>
+                        </div>
+
+                        <!-- 진행바 - 퍼센트  -->
+                        <div class="box-progress-wrapper">
+                            <p class="box-progress-header">Progress</p>
+                            <div class="box-progress-bar">
+                                <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
+                            </div>
+                            <p class="box-progress-percentage">60%</p>
+                        </div>
+
+                        <!-- 하얀선 아래  -->
+                        <div class="project-box-footer">
+
+                            <!-- 참가자 그림  -->
+                            <div class="participants">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+                                <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+                                <button class="add-participant" style="color: #ff942e;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                        <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- 2 Days Left 버튼 모양  -->
+                            <div class="days-left" style="color: #ff942e;">
+                                2 Days Left
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 메인 가운데 - 내용 영역 끝  -->
+
+            </div>
+        </div>
+
+        <!-- 메인 오른쪽 영역(채팅 메시지) -->
+        <div class="messages-section">
+            <!-- 화면 줄이면 나타나는 메시지 온오프 버튼(반응형) -->
+            <button class="messages-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" /></svg>
+            </button>
+            <!-- 메시지 맨 위 타이틀(client Messages 부분) -->
+            <div class="projects-section-header">
+                <p>Client Messages</p>
+            </div>
+
+            <!-- 메시지 시작 -->
+            <div class="messages">
+                <div class="message-box">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="profile image">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <div class="name">Stephanie</div>
+                            <div class="star-checkbox">
+                                <input type="checkbox" id="star-1">
+                                <label for="star-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                </label>
+                            </div>
+                        </div>
+                        <p class="message-line">
+                            I got your first assignment. It was quite good. 🥳 We can continue with the next assignment.
+                        </p>
+                        <p class="message-line time">
+                            Dec, 12
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- 메시지 끝 -->
+
+        </div>
+    </div>
+</div>
+<script src="/js/sample.js"></script>
+</body>
+</html>

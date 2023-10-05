@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{layout/head :: common_header(~{::title},~{::link})}">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="container-SWM">
+
+    <div id="mail_input" name="mail_input">
+        <input type="email" name="mail" id="mail" placeholder="이메일 입력">
+        <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">이메일 입력</button>
+    </div>
+    <br>
+    <div id="mail_number" name="mail_number" style="display: none">
+        <input type="text" name="number" id="number" placeholder="인증번호 입력">
+        <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">인증번호 입력</button>
+    </div>
+    <br>
+    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+
+</div>
+<script>
+    function sendNumber() {
+
+        var data = {"email": $("#mail").val()}
+
+        $("#mail_number").css("display", "block");
+        $.ajax({
+            type: "post",
+            url: "/email",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data) {
+                alert("인증번호 발송");
+                $("#Confirm").attr("value", data);
+            }
+        });
+    }
+
+    function confirmNumber() {
+        var number1 = $("#number").val();
+        var number2 = $("#Confirm").val();
+
+        if (number1 == number2) {
+            alert("인증되었습니다.");
+        } else {
+            alert("번호가 다릅니다.");
+        }
+    }
+</script>
+</body>
+</html>

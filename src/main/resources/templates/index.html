@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head th:replace="layout/head :: common_header(~{::title},~{::link})">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+</head>
+
+<body>
+<div id="logo"><a href="/">SWITHME</a></div>
+<div id="nav-icon">
+    <a th:href="@{/users/myPage}" sec:authorize="isAuthenticated()" class="right_button"><i
+            class="fa-solid fa-user"></i></a>
+
+    <a th:href="@{/users/logout}" sec:authorize="isAuthenticated()" class="right_button"><i
+            class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+    <a th:href="@{/users/login}" sec:authorize="!isAuthenticated()" class="right_button"><i
+            class="fa-solid fa-arrow-right-to-bracket"></i></a>
+</div>
+
+<div class="options">
+
+    <!--  게시글  -->
+    <div class="option active" style="--optionBackground:url(https://images.pexels.com/photos/12602990/pexels-photo-12602990.jpeg?auto=compress&cs=tinysrgb&w=800);">
+        <a href="/view/posts">
+            <div class="clicktoposts">
+                <div class="shadow"></div>
+                <div class="label">
+                    <div class="icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="info">
+                        <div class="main">게시판</div>
+                        <div class="sub">주제별 게시물을 확인해보세요!</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!--  그룹스터디  -->
+    <div class="option" style="--optionBackground:url(https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=800);">
+        <a href="/api/view/groups">
+            <div class="shadow"></div>
+            <div class="label">
+                <div class="icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="info">
+                    <div class="main">그룹스터디</div>
+                    <div class="sub">친구들과 함께 공부해보세요!</div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!--  캘린더  -->
+    <div class="option" style="--optionBackground:url(https://images.pexels.com/photos/9052846/pexels-photo-9052846.jpeg?cs=srgb&dl=pexels-shvets-production-9052846.jpg&fm=jpg);">
+        <a href="/studies/calendar">
+        <div class="shadow"></div>
+        <div class="label">
+            <div class="icon">
+                <i class="fas fa-walking"></i>
+            </div>
+            <div class="info">
+                <div class="main">캘린더</div>
+                <div class="sub">중요한 일정과 데드라인을 기록하세요!</div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <!--  스톱워치  -->
+    <div class="option" style="--optionBackground:url(https://images.pexels.com/photos/210528/pexels-photo-210528.jpeg?auto=compress&cs=tinysrgb&w=1600);">
+        <a href="/stopwatch">
+        <div class="shadow"></div>
+        <div class="label">
+            <div class="icon">
+                <i class="fas fa-snowflake"></i>
+            </div>
+            <div class="info">
+                <div class="main">스톱워치</div>
+                <div class="sub">하루 공부 시간을 측정해보세요!</div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <!--  채팅  -->
+    <div class="option" style="--optionBackground:url(https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800);">
+        <a href="/chat">
+        <div class="shadow"></div>
+        <div class="label">
+            <div class="icon">
+                <i class="fas fa-tint"></i>
+            </div>
+            <div class="info">
+                <div class="main">채팅</div>
+                <div class="sub">비슷한 주제를 가진 사람들과 대화해보세요!</div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+
+</div>
+
+<!--<a href="http://victorofvalencia-blog.tumblr.com" target="_blank" class="credit">Photos from Victor of Valencia on tumblr</a>-->
+
+<script src="/js/index.js"></script>
+<script>
+    function showAlertFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const content = urlParams.get('content');
+
+        if (content === 'password') {
+            alert('비밀번호가 변경되었습니다.');
+        }
+
+        if (content === 'login') {
+            alert('로그인 되었습니다.');
+        }
+    }
+</script>
+</body>
+</html>

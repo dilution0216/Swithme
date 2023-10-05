@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/head :: common_header(~{::title},~{::link})">
+    <title>게시물 상세 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/post/postDetail.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="app-container">
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+    <div class="app-content">
+        <!-- 왼쪽 메인 세로 네비게이션바 -->
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+        <div class="projects-section">
+            <div class="project-box" style="background-color: #e9e7fd;">
+                <!--                                                글쓰기 폼-->
+                <div class="write" id="write">
+                    <form>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-title">제목</span>
+                            <input type="text" id   ="title" class="form-control" aria-label="Sizing example input" th:value="${post.title}" aria-describedby="inputGroup-sizing" readonly>
+                        </div>
+                        <div class="input-group mb-3 g-2">
+                            <span class="input-group-text" id="inputGroup-username">작성자</span>
+                            <input type="text" id="username" class="form-control me-4" aria-label="Sizing example username" th:value="${post.userNickname}" aria-describedby="username-sizing" readonly>
+                            <span class="input-group-text" for="category">카테고리</span>
+                            <input type="text" id="category" class="form-control me-4" aria-label="Sizing example username" th:value="${post.category_name}" aria-describedby="username-sizing" readonly>
+                        </div>
+                        <div class="input-group-lg">
+                            <span class="input-group-text">게시글 내용</span>
+                            <span class="form-control" id="content" th:text="${post.content}"aria-label="With textarea" style="padding:30px"></span>
+                            <img class="form-control" id="image" th:if="${not #strings.isEmpty(post.image)}" th:src="${post.image}" th:alt="${post.title}" aria-label="With textarea" style="padding:30px" />
+                        </div>
+                        <!--수정, 삭제 버튼-->
+                        <div class="d-flex justify-content-center mt-3">
+                            <!-- Button to trigger the modal -->
+                            <button type="button" class="btn btn-dark btn-lg me-5 w-25" data-bs-toggle="modal" data-bs-target="#updatePost" th:if="${isCurrentUserAuthor}">수정</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="updatePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel1">알림!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            게시물을 수정하시겠습니까?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                            <button type="button" class="btn btn-primary" onclick="location.href='/view/post/update/'+lastPart">예</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--삭제버튼-->
+                            <button type="button" class="btn btn-dark btn-lg me-5 w-25" data-bs-toggle="modal" data-bs-target="#deletePost" th:if="${isCurrentUserAuthor}">삭제</button>
+<!--                            th:if="${isCurrentUserAuthor}" 가  Ture 면 버튼 이 보여지고, FALSE 면 버튼이 사라진다.-->
+                            <!-- Modal -->
+                            <div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">알림!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            게시물을 삭제하시겠습니까?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                            <button type="button" class="btn btn-primary" id="deleteButton" th:attr="data-postid=${post.id}">예</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--                                                글쓰기 폼 끝-->
+            </div>
+            <p></p>
+            <div class="project-box" style="background-color: #e9e7fd;">
+                <!-- 댓글 폼 -->
+                <h4>댓글</h4>
+                <div>
+                    <span id="currentNickname" th:text="${currentNickname}"></span>
+                    님 환영합니다!
+                </div>
+                <!-- 댓글 작성 양식 -->
+                <div>
+                    <label for="commentText">댓글 작성:</label>
+                    <!-- 작성자 닉네임 추가-->
+                    <input id="commentText"></input>
+                    <button id="commentSubmitBtn">댓글 작성</button>
+                </div>
+                <!-- 댓글 목록 -->
+                <div id="commentList">
+                    <!-- 댓글이 여기에 동적으로 추가됩니다 -->
+                </div>
+                <!-- 댓글 폼 끝-->
+            </div>
+        </div>
+    </div>
+</div>
+<a id="back-to-top"></a>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1199.0.min.js"></script>
+<script src="/js/post/postDetail.js"></script>
+</body>
+</html>

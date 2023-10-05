@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="layout/head :: common_header(~{::title},~{::link})">
+    <title>샘플 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/sample.css}"/>
+    <link rel="stylesheet" th:href="@{/css/nav.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/stopwatch/style.css}"/>
+</head>
+<style>
+    .projects-section-header {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 30px;
+    }
+
+    .message-box {
+        align-items: center;
+        justify-content: center;
+        display: grid;
+        font-size: 24px;
+    }
+</style>
+<body>
+<div class="app-container">
+    <!-- 상단 네비게이션 전체 -->
+    <div th:replace="~{fragment/nav :: useNav}">insert</div>
+
+    <!-- 메인 영역 전체(왼쪽 버튼, 프로젝트, 메시지 부분) -->
+    <div class="app-content">
+
+        <!-- 왼쪽 메인 세로 네비게이션바 -->
+        <div th:replace="~{fragment/nav :: useNav-vertical}">insert</div>
+
+        <!-- 메인 가운데 영역 -->
+        <div class="projects-section">
+
+            <!-- 메인 가운데 - 제목, 날짜 영역 -->
+            <div class="projects-section-header">
+                <p>개인스터디</p>
+            </div>
+
+
+            <div class="projects-section-line">
+                <!-- 메인 가운데 - 진행 영역(삭제 가능) -->
+                <div class="projects-status">
+
+                </div>
+
+                <!-- 메인 가운데 - 3개 분할 버튼, 길게 보기 버튼 -->
+                <div class="view-actions">
+
+                </div>
+
+            </div>
+
+            <!-- 메인 가운데 - 내용 영역 시작 -->
+            <div class="project-boxes jsGridView"> <!-- 메인 전체 박스 -->
+                <div id="stopwatch">
+                    <h2>공부 시간을 측정하세요</h2>
+                    <br></br>
+                    <div class="clockdiv">
+                        <div id="stopwatch-clock">
+                            00:00
+                        </div>
+                    </div>
+                    <br></br>
+                    <button id="stopwatch-start">시작</button>
+                    <button id="stopwatch-pause" hidden>중지</button>
+                    <button id="stopwatch-record" hidden>기록</button>
+                    <button id="stopwatch-restart" hidden>초기화</button>
+                    <div id="stopwatch-records"></div>
+                    <br>
+                    <br>
+                    <br>
+
+                    <br>
+                </div>
+                <!-- 메인 가운데 - 내용 영역 끝  -->
+
+            </div>
+        </div>
+
+        <!-- 메인 오른쪽 영역(채팅 메시지) -->
+        <div class="messages-section">
+            <!-- 화면 줄이면 나타나는 메시지 온오프 버튼(반응형) -->
+            <button class="messages-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" /></svg>
+            </button>
+            <!-- 메시지 맨 위 타이틀(client Messages 부분) -->
+            <div class="projects-section-header">
+                <p>공부한 시간을 확인하세요!</p>
+            </div>
+
+            <!-- 메시지 시작 -->
+            <div class="messages">
+                <div class="message-box">
+
+                    <div id="today-study-time">오늘 공부한 시간: <span id="display-today-time">00:00</span></div><br>
+                    <div id="total-study-time">총 공부한 시간: <span id="display-total-time">00:00</span></div>
+
+                </div>
+            </div>
+            <!-- 메시지 끝 -->
+
+        </div>
+    </div>
+</div>
+<!--<script src="/js/sample.js"></script>-->
+
+<script type="module" src="/js/stopwatch/modules/modules.js"></script>
+<script type="module" src="/js/stopwatch/stopwatch.js"></script>
+</body>
+</html>

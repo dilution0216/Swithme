@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{layout/head :: common_header(~{::title},~{})}">
+    <title>채팅 </title>
+</head>
+<body style="margin: 40px">
+
+<!-- 수정 : 타이틀, 제목 -->
+<form action="/chat/room/edit" method="post" th:object="${chatRoom}">
+
+
+    <input type="hidden" id="id" name="id" th:field="*{id}"><br>
+
+    <label for="title">제목: </label>
+    <input class="form-control" type="text" id="title" name="title" th:field="*{title}" maxlength="10"
+           width="100px"><br>
+
+    <label for="content">내용: </label>
+    <input class="form-control" type="text" id="content" name="content" th:field="*{content}" maxlength="10">
+
+    <button class="btn btn-primary btn-sm submit" type="submit" onclick="reload()">확인</button>
+
+</form>
+<br><br>
+
+<!-- 멤버 초대 -->
+<form action="/chat/room/invite" method="post" th:object="${chatRoom}">
+
+    <input type="hidden" name="id" th:field="*{id}"><br>
+
+    <label for="username">멤버 초대(이메일 입력)</label>
+    <input class="form-control" type="text" id="username" name="username"><br>
+
+    <input class="btn btn-primary submit" type="submit" value="확인">
+
+</form>
+
+<!-- 멤버 조회 -->
+<table>
+    <col style="width: 160px;">
+    <col style="width: 100px;">
+    <col style="width: 80px;">
+    <tr>
+        <th>아이디</th>
+        <th>수락 여부</th>
+        <th>삭제</th>
+    </tr>
+    <tr th:each="inviteUser : ${inviteUsers}">
+        <td th:text="${inviteUser.username}"></td>
+        <td th:text="${inviteUser.invite}"></td>
+        <td>
+            <button type="button" class="btn btn-outline-danger btn-sm"
+                    th:onclick="'deleteMember(' + ${inviteUser.id} + ')'">Delete
+            </button>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<button type="button" class="btn btn-outline-danger btn-sm"
+        th:onclick="'deleteChatRoom(' + ${chatRoom.id} + ')'">채팅룸 삭제
+</button>
+
+<!-- 멤버 삭제 -->
+<script>
+    function reload() {
+        alert("수정되었습니다.")
+        window.opener.location.reload();
+    }
+
+    function deleteMember(id) {
+        let data = {'id': id};
+
+        $.ajax({
+            method: 'Delete',
+            url: '/chat/room/member',
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                window.location.reload();
+                alert(response);
+
+            },
+            error: function (xhr, status, error) {
+                // 에러 시 처리할 코드
+                console.error(error);
+            }
+        });
+    }
+
+    // 채팅룸 삭제
+    function deleteChatRoom(id) {
+        let data = {'id': id};
+
+        $.ajax({
+            method: 'Delete',
+            url: '/chat/chatroom',
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                window.opener.location.reload();
+                alert(response)
+                window.close()
+            },
+            error: function (xhr, status, error) {
+                // 에러 시 처리할 코드
+                console.error(error);
+            }
+        });
+    }
+</script>
+</body>
+</html>

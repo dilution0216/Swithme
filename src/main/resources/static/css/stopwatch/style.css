@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+}
+
+/*body {*/
+/*    padding: 1rem;*/
+/*}*/
+
+.project-boxes {
+    display: flex; /* flex 컨테이너로 설정합니다. */
+    justify-content: center; /* 수평 가운데 정렬합니다. */
+    align-items: center; /* 수직 가운데 정렬합니다. */
+    /*text-align: center; !* 텍스트도 가운데 정렬합니다. *!*/
+}
+
+
+h2 {
+    margin-top: 1.5rem;
+}
+
+#stopwatch > button {
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.3rem;
+    border: none;
+    box-shadow: 0 3px 8px 4px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    transition: 0.2s;
+}
+
+#stopwatch > button:hover {
+    background-color: rgb(233, 245, 233);
+    box-shadow: 0 3px 4px 2px rgba(0, 66, 9, 0.25);
+}
+
+#stopwatch > button:active {
+    background-color: white;
+}
+
+#stopwatch {
+    margin: 20px;
+}
+
+.clockdiv {
+    margin-top: 1rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    box-shadow: 0 3px 10px 4px rgba(37, 58, 32, 0.3);
+    background: linear-gradient(45deg, rgba(26, 73, 14, 0.2), white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+#timer-records,
+#stopwatch-records {
+    position: absolute;
+    right: 100px;
+    top: 10vh;
+    height: 30vh;
+    /*overflow-y: scroll;*/
+}
+
+#stopwatch-records {
+    top: 60vh
+}
