@@ -1,11 +1,11 @@
 # 프로젝트 명 : SWITHME(Study With Me)📕 
-<img src="https://drive.google.com/uc?id=1BSPPXwC5nxy_Eqex_-pRwvmUXJszUi0Y" />
+<img src="https://drive.google.com/uc?id=1BSPPXwC5nxy_Eqex_-pRwvmUXJszUi0Y"/>
 
 안녕하세요, 함께 공부하는 웹사이트 : 스윗미(SWITHME)입니다.
 <br>스윗미는 게시판, 그룹, 캘린더, 스톱워치, 채팅서비스를 제공하는 스터디 웹사이트입니다.
 
-• 개발 기간 : 2023.08.26. ~ 2023.09.18.
-<br> • 팀 노션 : [URL](https://rowan-pufferfish-a5a.notion.site/SWITHME-aeed82dd52144ca7b058d18e6405d2bd)
+• 개발 기간 : 2023.08.26. ~ 2023.09.18.(3주)
+<br> • 팀 노션 : [URL](https://rowan-pufferfish-a5a.notion.site/SWITHME-884f77ca6e294588a2ffe745900de845?pvs=4)
 <br>
 <img src="https://drive.google.com/uc?id=1ycENGrTHndcqJIcovlP4X-CnNy1VERtU" />
  <br><br>
@@ -14,25 +14,21 @@
         <ol>
             <li>게시판📋</li>
             네 가지 카테고리별 게시판과 댓글/대댓글 기능을 통해 사용자 간의 관심 분야와 정보를 공유하는 커뮤니케이션 장을 제공합니다.
-            <img src="" />
             <li>그룹👥</li>
             동일한 관심 주제를 가진 멤버들이 모여 그룹을 형성하고 목표를 세우며 멤버별 누적시간의 순위를 확인합니다.   
-            <img src="" />
             <li>캘린더📆</li>
             개인의 학업/업무 스케줄을 저장하고 관리할 수 있는 공간을 제공합니다.
-            <img src="" />
             <li>스톱워치⏱️</li>
             자투리 시간 활용 및 높은 효율성을 위해 타이머 기능 및 누적시간 조회 기능을 제공합니다.
-            <img src="" />
             <li>채팅💻</li>
             개인이 유저를 초대하여 채팅창을 생성하고 대화를 나눌 수 있습니다. 초대된 유저는 초대를 거절할 수 있습니다.
-            <img src="" />
             <li>메인 페이지📚</li>
             5개의 메뉴를 확인하고 선택하여 이동할 수 있는 메인 페이지입니다.
-            <img src="" />
         </ol>
     </div>
-   <br>
+ <br>
+<h2><a href="https://rowan-pufferfish-a5a.notion.site/SWITHME-884f77ca6e294588a2ffe745900de845" >🗄️ 아키텍쳐</a></h2>
+<img src="https://drive.google.com/uc?id=14yPLmV5HJks5JwxcZH2yNLUyuK4ILX4o" />
 
 <h2>🌐 ERD & API</h2>
 <a href="https://www.erdcloud.com/d/nsyTLkMBDYAbSdHum" > ERD </a> &
@@ -71,11 +67,18 @@
 </div>
 
 <br>
-<h2>🗄️ 아키텍쳐</h2>
-<a href="https://miro.com/app/board/uXjVMpMSLE8=/?share_link_id=837613822203" > 아키텍쳐 </a>
-
-<br>
-<h2>🤝 협업 규칙</h2>
-<a href="https://www.notion.so/0599f43749c2427c853fa95cdaa8b238?pvs=4">협업 규칙</a>
-
+<h2><a href="https://www.notion.so/0599f43749c2427c853fa95cdaa8b238?pvs=4">🤝 협업 규칙</a></h2>
+<div>
+       <ol>
+           <li>코드 컨벤션</li>
+           Commit 메시지 구조 - 제목,본문,꼬리말 세가지 파트로 나눔
+           <br> 각 파트는 빈줄을 두어 구분
+           <li>코드 컨벤션</li>
+           클래스 이름 - 첫 문자는 대문자, 카멜 케이스 스타일 
+           <br> 변수명 및 메서드명 - 첫 문자는 소문자, 가멜 케이스 스타일
+           <li>깃허브 컨벤션</li>
+           브랜치 전략 → 기능별 브랜치 → Develop 브랜치 → Main 브랜치(최종)
+           <br> 머지(병합)시 최소 다른 팀원 2명 이상의 “코드 확인 후” 리뷰 남기고 나서 (승인 2개 이상) 병합
+       </ol>
+ </div>
 
