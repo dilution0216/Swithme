@@ -32,7 +32,7 @@
 
 <h2>🌐 ERD & API</h2>
 <a href="https://www.erdcloud.com/d/nsyTLkMBDYAbSdHum" > ERD </a> &
-<a href="https://www.notion.so/API-01750d96374a4aa9afc58ab496c0a65e?pvs=4" > API</a>
+<a href="https://young-baron-d39.notion.site/7c369a586ec944ba80a535197a03bc6a?v=6fc3cb1ffa3c433aa086ecff7bfdc40d&pvs=4" > API</a>
 
 <br>
 <h2>⛏️기술 스택</h2>
