@@ -7,10 +7,7 @@
 • 개발 인원 : 4명
 
 <br> • 팀 노션 : [URL](https://rowan-pufferfish-a5a.notion.site/SWITHME-7f7439e749f14811b222065339171abe)
-<br> • 팀 깃허브 : [URL] (https://github.com/sparta-ecochiko/swithme)
-<br>
-<img src="https://drive.google.com/uc?id=1ycENGrTHndcqJIcovlP4X-CnNy1VERtU" />
- <br><br>
+<br> • 팀 깃허브 : [URL](https://github.com/sparta-ecochiko/swithme)
  <div>
         <h2>📌 핵심 기능</h2>
         <ol>
