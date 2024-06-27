@@ -108,6 +108,136 @@
 - **데이터 무결성 유지**
     - 현재 날짜와 마지막 기록 날짜를 비교하여 일자가 변경될 경우, 누적 시간을 초기화하는 로직을 도입하여 데이터의 신뢰성을 향상
 
+
+### 컴퓨터 기초이론을 실제 적용하여 작성한 코드
+
+### **1.자료구조 적용**
+
+'공부 시간 기록 기능'을 구현할 때, 사용자별 공부 시간을 관리하기 위해 **배열**과 **해시맵**을 사용했습니다. 배열은 시간 기록을 순차적으로 저장하는 데 사용되었고, 해시맵은 사용자별로 시간 기록을 빠르게 조회하고 관리하기 위해 활용했습니다.
+
+swithme/src/main/java/com/sparta/swithme/service/RecordService.java
+
+```java
+@Service
+public class RecordService {
+
+    private final RecordRepository recordRepository;
+
+    // Constructor
+    public RecordService(RecordRepository recordRepository) {
+        this.recordRepository = recordRepository;
+    }
+
+    public List<StudyRecord> getRecordsForUser(Long userId) {
+        // 데이터를 해시맵 구조로 저장하여 사용자별로 빠르게 접근 가능
+        HashMap<Long, List<StudyRecord>> userRecordsMap = new HashMap<>();
+        
+        // 사용자의 전체 공부 기록을 리스트로 관리
+        List<StudyRecord> userRecords = recordRepository.findByUserId(userId);
+        userRecordsMap.put(userId, userRecords);
+        
+        return userRecords;
+    }
+}
+
+```
+
+### **2. 알고리즘 적용**
+
+사용자가 입력한 시간 문자열을 분 단위로 파싱하여, 일관된 형식으로 변환하는 알고리즘을 구현했습니다. 
+
+swithme/src/main/java/com/sparta/swithme/service/TimeParsingService.java
+
+```java
+@Service
+public class TimeParsingService {
+
+    public int parseTimeToMinutes(String timeString) {
+        // 정규 표현식을 사용하여 시간 문자열을 분 단위로 파싱
+        Pattern pattern = Pattern.compile("(\\d+):(\\d+)");
+        Matcher matcher = pattern.matcher(timeString);
+
+        if (matcher.matches()) {
+            int hours = Integer.parseInt(matcher.group(1));
+            int minutes = Integer.parseInt(matcher.group(2));
+            return hours * 60 + minutes;
+        } else {
+            throw new IllegalArgumentException("Invalid time format");
+        }
+    }
+}
+```
+
+**정규 표현식(Regular Expression)** 을 사용하여 시간 문자열을 분 단위로 파싱하는 알고리즘을 구현하였습니다.
+
+사용자가 입력한 시간 문자열이 HH:MM 형식인지 확인하고, 이를 분 단위로 변환하여 저장합니다. 이를 통해 ‘공부시간’ 이라는 데이터의 일관성을 유지하고자 하였습니다.
+
+### **3. 컴퓨터 구조 적용**
+
+MVC 아키텍처의 Controller 부분에서 HTTP 요청을 처리하고, 서비스 계층으로 전달하도록 하였습니다.
+
+swithme/src/main/java/com/sparta/swithme/controller/RecordController.java
+
+```java
+@RestController
+@RequestMapping("/api/records")
+public class RecordController {
+
+    private final RecordService recordService;
+
+    public RecordController(RecordService recordService) {
+        this.recordService = recordService;
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<StudyRecord>> getRecords(@PathVariable Long userId) {
+        // 사용자 ID로 기록을 조회하고 반환
+        List<StudyRecord> records = recordService.getRecordsForUser(userId);
+        return ResponseEntity.ok(records);
+    }
+
+    @PostMapping
+    public ResponseEntity<StudyRecord> createRecord(@RequestBody StudyRecord studyRecord) {
+        // 새로운 기록을 생성하고 저장
+        StudyRecord newRecord = recordService.saveRecord(studyRecord);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRecord);
+    }
+}
+```
+
+RecordController는 HTTP 요청을 처리하고, RecordService로 전달하게 됩니다. 이러한 MVC 구조를 통해 의존성을 줄여서 유지보수성을 높이도록 코드를 작성하였습니다.
+
+### **4. 예외 처리 및 최적화**
+
+커스텀 예외 처리를 통해 예상 가능한 문제 상황에 대해 미리 대응하고자 하였습니다.
+
+swithme/src/main/java/com/sparta/swithme/exception/RecordTimeException.java
+
+```java
+public class RecordTimeException extends RuntimeException {
+    public RecordTimeException(String message) {
+        super(message);
+    }
+}
+```
+
+swithme/src/main/java/com/sparta/swithme/service/RecordService.java
+
+```java
+public void saveRecord(StudyRecord studyRecord) {
+    if (studyRecord.getDuration() <= 0) {
+        throw new RecordTimeException("Study duration must be positive.");
+    }
+    recordRepository.save(studyRecord);
+}
+```
+
+RecordTimeException 을 정의하고, 사용자가 잘못된 데이터를 입력했을 때, 이를 즉시 예외처리하고 사용자에게 피드백을 제공하도록 설계하였습니다.
+
+
+
+
+
 ### 트러블슈팅
 
 ---
