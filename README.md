@@ -4,7 +4,6 @@
 
 • 개발 기간 : 2023.08.26. ~ 2023.09.18.(3주)
 • 개발 인원 : 4명
-
 <br> • 팀 노션 : [URL](https://rowan-pufferfish-a5a.notion.site/SWITHME-7f7439e749f14811b222065339171abe)
 <br> • 팀 깃허브 : [URL](https://github.com/sparta-ecochiko/swithme)
  
