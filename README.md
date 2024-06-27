@@ -12,9 +12,13 @@
 <h2><a href="https://rowan-pufferfish-a5a.notion.site/SWITHME-884f77ca6e294588a2ffe745900de845" >🗄️ 아키텍쳐</a></h2>
 <img src="https://drive.google.com/uc?id=14yPLmV5HJks5JwxcZH2yNLUyuK4ILX4o" />
 
+<br>
+
 <h2>🌐 ERD & API</h2>
 <a href="https://www.erdcloud.com/d/nsyTLkMBDYAbSdHum" > ERD </a> &
 <a href="https://young-baron-d39.notion.site/7c369a586ec944ba80a535197a03bc6a?v=6fc3cb1ffa3c433aa086ecff7bfdc40d&pvs=4" > API</a>
+
+<br>
 
 ### **주요 역할 : 공부시간 기록 기능 개발**
 
@@ -26,9 +30,6 @@
     - 전반적인 **기획, 일정관리, 업무 분담, 커뮤니케이션 증대, 백엔드 개발**
     - 서비스의 흐름, 기능 동작에 대한 이해와 커뮤니케이션을 위한 **인포메이션 아키텍쳐 작성**
     - 체계적인 개발과 **의사소통을 위한 코드 컨벤션, 커밋 컨벤션 기획**
-<br>
-<br>
-<br>
 <br>
 
 ### **기술적 특징 및 구현 세부사항**
@@ -52,9 +53,10 @@
 <br>
 <br>
 <br>
-<br>
 
-### **컴퓨터 기초이론을 실제 적용하여 작성한 코드
+### 컴퓨터 기초이론을 실제 적용하여 작성한 코드
+
+<br>
 
 ### **1.자료구조 적용**
 
