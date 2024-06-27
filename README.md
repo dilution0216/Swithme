@@ -61,7 +61,7 @@
 
 ### **1.자료구조 적용**
 
-'공부 시간 기록 기능'을 구현할 때, 사용자별 공부 시간을 관리하기 위해 **배열**과 **해시맵**을 사용했습니다. 배열은 시간 기록을 순차적으로 저장하는 데 사용되었고, 해시맵은 사용자별로 시간 기록을 빠르게 조회하고 관리하기 위해 활용했습니다.
+'공부 시간 기록 기능'을 구현할 때, 사용자별 공부 시간을 관리하기 위해 **배열**과 **해시맵**을 사용함. 배열은 시간 기록을 순차적으로 저장하는 데 사용되었고, 해시맵은 사용자별로 시간 기록을 빠르게 조회하고 관리하기 위해 활용
 
 swithme/src/main/java/com/sparta/swithme/service/RecordService.java
 
@@ -92,7 +92,7 @@ public class RecordService {
 
 ### **2. 알고리즘 적용**
 
-사용자가 입력한 시간 문자열을 분 단위로 파싱하여, 일관된 형식으로 변환하는 알고리즘을 구현했습니다. 
+사용자가 입력한 시간 문자열을 분 단위로 파싱하여, 일관된 형식으로 변환하는 알고리즘을 구현
 
 swithme/src/main/java/com/sparta/swithme/service/TimeParsingService.java
 
@@ -116,13 +116,13 @@ public class TimeParsingService {
 }
 ```
 
-**정규 표현식(Regular Expression)** 을 사용하여 시간 문자열을 분 단위로 파싱하는 알고리즘을 구현하였습니다.
+**정규 표현식(Regular Expression)** 을 사용하여 시간 문자열을 분 단위로 파싱하는 알고리즘을 구현
 
-사용자가 입력한 시간 문자열이 HH:MM 형식인지 확인하고, 이를 분 단위로 변환하여 저장합니다. 이를 통해 ‘공부시간’ 이라는 데이터의 일관성을 유지하고자 하였습니다.
+사용자가 입력한 시간 문자열이 HH:MM 형식인지 확인하고, 이를 분 단위로 변환하여 저장함. 이를 통해 ‘공부시간’ 이라는 데이터의 일관성을 유지
 
 ### **3. 컴퓨터 구조 적용**
 
-MVC 아키텍처의 Controller 부분에서 HTTP 요청을 처리하고, 서비스 계층으로 전달하도록 하였습니다.
+MVC 아키텍처의 Controller 부분에서 HTTP 요청을 처리하고, 서비스 계층으로 전달
 
 swithme/src/main/java/com/sparta/swithme/controller/RecordController.java
 
@@ -153,11 +153,11 @@ public class RecordController {
 }
 ```
 
-RecordController는 HTTP 요청을 처리하고, RecordService로 전달하게 됩니다. 이러한 MVC 구조를 통해 의존성을 줄여서 유지보수성을 높이도록 코드를 작성하였습니다.
+RecordController는 HTTP 요청을 처리하고, RecordService로 전달한다. 이러한 MVC 구조를 통해 의존성을 줄여서 유지보수성을 높이도록 코드를 작성
 
 ### **4. 예외 처리 및 최적화**
 
-커스텀 예외 처리를 통해 예상 가능한 문제 상황에 대해 미리 대응하고자 하였습니다.
+커스텀 예외 처리를 통해 예상 가능한 문제 상황에 대해 미리 대응하고자 함
 
 swithme/src/main/java/com/sparta/swithme/exception/RecordTimeException.java
 
@@ -180,7 +180,7 @@ public void saveRecord(StudyRecord studyRecord) {
 }
 ```
 
-RecordTimeException 을 정의하고, 사용자가 잘못된 데이터를 입력했을 때, 이를 즉시 예외처리하고 사용자에게 피드백을 제공하도록 설계하였습니다.
+RecordTimeException 을 정의하고, 사용자가 잘못된 데이터를 입력했을 때, 이를 즉시 예외처리하고 사용자에게 피드백을 제공하도록 설계
 
 
 <br>
